@@ -33,7 +33,8 @@ export default {
 </script>
 <style lang="less" scoped>
 .ingredient{
-    margin: 30px 20px;
+    padding: 40px 0;
+    background-color: #fff;
     .ingredientTop{
         .left{
             font-weight: bold;

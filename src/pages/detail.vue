@@ -4,46 +4,86 @@
         <div class="foodImg">
             <img src="https://img.alicdn.com/imgextra/i1/4057485658/O1CN01wXWjcg1rfPSHPXE1G_!!4057485658.jpg" alt="">
         </div>
-        <div class="detailIntro">
-            <div class="introTop">
-                <div class="title">广州肠粉</div>
-                <div class="achievement flex-box">
-                    <div class="collect">
-                        <span>44</span>人收藏
-                    </div>
-                    <div class="like">
-                        <span>41</span>人点赞
-                    </div>
-                </div>
-                <div class="infor flex-b-sbc">
-                    <div class="left flex-b-cc">
-                        <div class="Portrait">
-                            <img src="https://ak.hypergryph.com/upload/images/20190228/32ddf0470a305376204d1312ca4720f9.jpg" alt="">
+        <div style="background:#fff;padding: 0 20px;border-radius: 15px;">
+            <div class="detailIntro">
+                <div class="introTop">
+                    <div class="title">广州肠粉</div>
+                    <div class="achievement flex-box">
+                        <div class="collect">
+                            <span>44</span>人收藏
                         </div>
-                        <div class="name">Heyinb</div>
+                        <div class="like">
+                            <span>41</span>人点赞
+                        </div>
                     </div>
-                    <div class="right">
-                        关注
+                    <div class="infor flex-b-sbc">
+                        <div class="left flex-b-cc">
+                            <div class="Portrait">
+                                <img src="https://ak.hypergryph.com/upload/images/20190228/32ddf0470a305376204d1312ca4720f9.jpg" alt="">
+                            </div>
+                            <div class="name">Heyinb</div>
+                        </div>
+                        <div class="right">
+                            关注
+                        </div>
                     </div>
+                    <div class="content">肠粉始于唐朝，源于泷州(今罗定)。因为是唐朝泷州龙龛道场一名叫惠积的佛家人无意发明，所以又叫惠积糍、龙龛糍。[1]广州肠粉是广州
+                        茶楼、酒家早茶夜市的必备之品，同时也是很多市民早餐的必选之品。布拉肠粉是将米浆置于布上蒸成，又叫布拉蒸肠粉。以往经常由流动小贩在街角出售斋肠，大部份已转为
+                        铺位经营，一般会将肠粉切断，吃时再加入芝麻、甜酱及辣酱调味。注意，猪肠粉与肠粉并非同一类食物，但某些食客会将之混淆。猪肠.料呆然同旦米将生作A旦却上 肠粉不同陆</div>
                 </div>
-                <div class="content">肠粉始于唐朝，源于泷州(今罗定)。因为是唐朝泷州龙龛道场一名叫惠积的佛家人无意发明，所以又叫惠积糍、龙龛糍。[1]广州肠粉是广州
-                    茶楼、酒家早茶夜市的必备之品，同时也是很多市民早餐的必选之品。布拉肠粉是将米浆置于布上蒸成，又叫布拉蒸肠粉。以往经常由流动小贩在街角出售斋肠，大部份已转为
-                    铺位经营，一般会将肠粉切断，吃时再加入芝麻、甜酱及辣酱调味。注意，猪肠粉与肠粉并非同一类食物，但某些食客会将之混淆。猪肠.料呆然同旦米将生作A旦却上 肠粉不同陆</div>
+            </div>
+            <ingredient />
+            <div class="step">
+                <div class="stepTop flex-b-sbc">
+                    <div class="left">烹饪步骤</div>
+                    <div class="pattern">进入烹饪模式</div>
+                </div>
+                <step />
+            </div>
+            <div class="tips">
+                <div class="tipsTop">小贴士</div>
+                <div  class="tipsBottom">大米可以用波碎机打成糊，没有的可以这样做</div>
+            </div>
+            <div class="vueScroll">
+                <div class="vueScrollTitle">相关菜谱</div>
+                <scroll-view />
+            </div>
+            <div class="comment">
+                <div class="commentTop flex-b-sbc">
+                    <div class="left">评论</div>
+                    <div class="right">写评论</div>
+                </div>
+                <div class="commentBottom">
+                    <comment />
+                    <comment />
+                    <comment />
+
+                </div>
+            </div>
+            <div class="vueScroll">
+                <div class="vueScrollTitle">包含这道菜的专辑</div>
+                <scroll-view />
             </div>
         </div>
-        <ingredient />
+
         <!-- <div style="height:1000px;"></div> -->
    </div>
 </template>
 <script>
 import topHeader from "../components/topHeader"
 import ingredient from "../components/ingredient"
+import step from "../components/step"
+import scrollView from "../components/scrollView"
+import comment from "../components/comment"
 
 export default {
     name: 'detail',
     components:{
         topHeader,
-        ingredient
+        ingredient,
+        step,
+        scrollView,
+        comment
     },
     data () {
         return {
@@ -68,14 +108,11 @@ export default {
     .detailIntro{
         margin: -10px 0;
         width: 100%;
-        border-radius: 15px;
-
-        background-color: #fff;
 
         z-index: 999;
 
         .introTop{
-            margin: 0 20px;
+            // margin: 0 20px;
             .title{
                 padding: 30px 0;
                 font-weight: bold;
@@ -124,5 +161,34 @@ export default {
         }
         
     }
+    .step{
+        .stepTop{
+            margin-bottom: 30px;
+            // padding: 0 20px;
+            .left{
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+    }
+    .tips{
+        margin: 0 auto;
+        .tipsTop{
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .tipsBottom{
+            margin: 10px 0 80px 0;
+        }
+    }
+    .vueScroll{
+        .vueScrollTitle{
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+    
 }
 </style>

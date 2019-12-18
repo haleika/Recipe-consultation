@@ -16,6 +16,9 @@ Vue.use(MintUI)
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 
+import VueTouch from 'vue-touch'
+Vue.use(VueTouch, {name: 'v-touch'})
+
 import { Lazyload } from 'mint-ui';
 Vue.use(Lazyload);
 
