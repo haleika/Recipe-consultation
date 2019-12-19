@@ -57,7 +57,6 @@
                     <comment />
                     <comment />
                     <comment />
-
                 </div>
             </div>
             <div class="vueScroll">
