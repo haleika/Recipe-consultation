@@ -285,9 +285,9 @@ export default {
     //     index++
     //   }
     //   console.log('currentIndex: ', index)
-
       return index
-    }
+    },
+    
   },
   mounted () {
     this.$nextTick(() => {
@@ -327,7 +327,7 @@ export default {
 .cascad-menu {
   display: flex;
   position: absolute;
-  top: 40px;
+  top: 60px;
   bottom: 0;
   width: 100%;
   overflow: hidden;

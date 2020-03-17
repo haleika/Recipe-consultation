@@ -1,5 +1,5 @@
 <template>
-   <div class='topHeader'>
+   <div class='topHeader' @click="toHome">
        <div class="flex-b-sbc" :class="[isScroll?s1:s2]">
            <div class="left iconfont">&#xe62f;</div>
            <div class="icon flex-b-cc" >
@@ -32,6 +32,12 @@ export default {
             }else{
                 this.isScroll = false
             }
+        },
+        toHome(){
+            console.log("点击了返回")
+            this.$router.push({
+                name:'home'
+            })
         }
     }
 }

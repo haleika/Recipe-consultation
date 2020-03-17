@@ -1,12 +1,12 @@
 <template>
    <div class='home'>
-       <div class="home-top flex-box flex-b-sbc">
+       <div class="home-top flex-box flex-b-sac">
            <div class="top-left iconfont">&#xe644;</div>
            <div class="top-search flex-box">
                <div class="search-box">
-                   <div class="search-item">
+                   <router-link to="/search" class="search-item">
                        <input type="text" class="input-box"  placeholder="搜索 菜谱/课程/用户">
-                   </div>
+                   </router-link>
                </div>
                <div class="glass iconfont">&#xe613;</div>
            </div>
@@ -20,29 +20,29 @@
             </el-carousel>
        </div>
        <div class="classify flex-b-sac">
-           <div class="listItem">
+           <router-link to="classify" class="listItem" tag="div">
                <div class="item">
                    <img src="../assets/img/fenlei.jpg" alt="">
                </div>
                <p class="simple-ellipsis1">菜谱分类</p>
-           </div>
+           </router-link>
            <div class="listItem">
                <div class="item">
                    <img src="../assets/img/qiandao.jpg" alt="">
                </div>
-               <p class="simple-ellipsis1">菜谱分类</p>
+               <p class="simple-ellipsis1">签到奖励</p>
            </div>
            <div class="listItem">
                <div class="item">
                    <img src="../assets/img/clsaa.jpg" alt="">
                </div>
-               <p class="simple-ellipsis1">菜谱分类</p>
+               <p class="simple-ellipsis1">厨艺课堂</p>
            </div>
            <div class="listItem">
                <div class="item">
                    <img src="../assets/img/winter.jpg" alt="">
                </div>
-               <p class="simple-ellipsis1">菜谱分类</p>
+               <p class="simple-ellipsis1">冬季菜谱</p>
            </div>
        </div>
        <div class="push">
@@ -54,22 +54,20 @@
                <div class="push-more">更多></div>
            </div>
            <div class="push-list">
-               <div class="flex-box flex-b-sac fw-wr">
-                   <menu-card></menu-card>
-                   <menu-card></menu-card>
-                   <menu-card></menu-card>
-                   <menu-card></menu-card>
-               </div>
+                <menu-card></menu-card>
            </div>
        </div>
+        <nav-bottom />
    </div>
 </template>
 <script>
 import menuCard from "../components/menuCard"
+import navBottom from "../components/nav"
 export default {
     name: 'home',
     components:{
-        menuCard
+        menuCard,
+        navBottom
     },
     data () {
         return {
@@ -82,7 +80,6 @@ export default {
 .home{
     .home-top{
         padding:0 10px;
-        height: 259px/2;
 
         background-color: #f3f3f3;
         .top-left{
@@ -98,7 +95,7 @@ export default {
                         border: none;
                         border-radius: 10px;
                         height: 74px/2;
-                        width: 600px/2;
+                        width: 16rem;
                         text-indent:40px;
 
                         box-shadow:-1px 0 5px 2px #ccc;
@@ -144,6 +141,7 @@ export default {
         }
     }
     .push{
+        margin-bottom: 30px;
         .push-top{
             padding: 0 7px;
             .push-title{
