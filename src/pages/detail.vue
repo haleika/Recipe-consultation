@@ -2,12 +2,12 @@
    <div class='detail'>
         <top-header />
         <div class="foodImg">
-            <img src="https://img.alicdn.com/imgextra/i1/4057485658/O1CN01wXWjcg1rfPSHPXE1G_!!4057485658.jpg" alt="">
+            <img :src="shipuData[0].coverimg" alt="">
         </div>
         <div style="background:#fff;padding: 0 20px;border-radius: 15px;">
             <div class="detailIntro">
                 <div class="introTop">
-                    <div class="title">广州肠粉</div>
+                    <div class="title">{{shipuData[0].title}}</div>
                     <div class="achievement flex-box">
                         <div class="collect">
                             <span>44</span>人收藏
@@ -19,31 +19,29 @@
                     <div class="infor flex-b-sbc">
                         <div class="left flex-b-cc">
                             <div class="Portrait">
-                                <img src="https://ak.hypergryph.com/upload/images/20190228/32ddf0470a305376204d1312ca4720f9.jpg" alt="">
+                                <img :src="shipuData[0].avatar" alt="">
                             </div>
-                            <div class="name">Heyinb</div>
+                            <div class="name">{{shipuData[0].name}}</div>
                         </div>
                         <div class="right">
                             关注
                         </div>
                     </div>
-                    <div class="content">肠粉始于唐朝，源于泷州(今罗定)。因为是唐朝泷州龙龛道场一名叫惠积的佛家人无意发明，所以又叫惠积糍、龙龛糍。[1]广州肠粉是广州
-                        茶楼、酒家早茶夜市的必备之品，同时也是很多市民早餐的必选之品。布拉肠粉是将米浆置于布上蒸成，又叫布拉蒸肠粉。以往经常由流动小贩在街角出售斋肠，大部份已转为
-                        铺位经营，一般会将肠粉切断，吃时再加入芝麻、甜酱及辣酱调味。注意，猪肠粉与肠粉并非同一类食物，但某些食客会将之混淆。猪肠.料呆然同旦米将生作A旦却上 肠粉不同陆</div>
+                    <div class="content">{{shipuData[0].intro}}</div>
                 </div>
             </div>
-            <ingredient />
+            <ingredient :Ingredient="Ingredient"/>
             <div class="step">
                 <div class="stepTop flex-b-sbc">
                     <div class="left">烹饪步骤</div>
                     <div class="pattern">进入烹饪模式</div>
                 </div>
-                <step />
+                <step :shipuList="shipuList"/>
             </div>
-            <div class="tips">
+            <!-- <div class="tips">
                 <div class="tipsTop">小贴士</div>
                 <div  class="tipsBottom">大米可以用波碎机打成糊，没有的可以这样做</div>
-            </div>
+            </div> -->
             <div class="vueScroll">
                 <div class="vueScrollTitle">相关菜谱</div>
                 <scroll-view />
@@ -54,15 +52,13 @@
                     <div class="right">写评论</div>
                 </div>
                 <div class="commentBottom">
-                    <comment />
-                    <comment />
-                    <comment />
+                    <comment :pinglun="pinglun"/>
                 </div>
             </div>
-            <div class="vueScroll">
+            <!-- <div class="vueScroll">
                 <div class="vueScrollTitle">包含这道菜的专辑</div>
                 <scroll-view />
-            </div>
+            </div> -->
         </div>
 
         <!-- <div style="height:1000px;"></div> -->
@@ -74,6 +70,7 @@ import ingredient from "../components/ingredient"
 import step from "../components/step"
 import scrollView from "../components/scrollView"
 import comment from "../components/comment"
+import axios from "axios"
 
 export default {
     name: 'detail',
@@ -86,8 +83,53 @@ export default {
     },
     data () {
         return {
-            
+            shipuList:[],
+            shipuData:{},
+            Ingredient:[],
+            pinglun:[]
         }
+    },
+    mounted(){
+        // console.log(this.$route.query.id)
+        this.getShipu();
+        this.getShipuData();
+        this.getshipuIngredients();
+        this.getpinglun()
+    },
+    methods:{
+        // 获取食谱
+        getShipu(){
+            axios.get("api/shipu/"+this.$route.query.id).then(this.getShipuSucc)
+        },
+        getShipuSucc(res){
+            this.shipuList = res.data
+            // console.log("3333333",res)
+        },
+        // 获取食谱详情
+        getShipuData(){
+            axios.get("api/shipuData/"+this.$route.query.id).then(this.getShipuDataSucc)
+        },
+        getShipuDataSucc(res){
+            this.shipuData = res.data
+            // console.log("3333333",res.data)
+        },
+
+        // 获取食材
+        getshipuIngredients(){
+            axios.get("api/shipuIngredients/"+this.$route.query.id).then(this.getshipuIngredientsSucc)
+        },
+        getshipuIngredientsSucc(res){
+            this.Ingredient = res.data
+            console.log("3333333",res.data)
+        },
+        // 获取评论
+        getpinglun(){
+            axios.get("api/pinglun/"+this.$route.query.id).then(this.getpinglunSucc)
+        },
+        getpinglunSucc(res){
+            this.pinglun = res.data
+            console.log("pinglun",res.data)
+        },
     }
 }
 </script>

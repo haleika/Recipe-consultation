@@ -1,16 +1,16 @@
 <template>
    <div class='myInfo'>
        <div class="myInfoData">
-            <div class="hasLoggedOn">
+            <div class="hasLoggedOn" v-if="this.$store.state.code == 1">
                 <div class="user flex-b-sbc">
                         <div class="userInfo flex-b-cc">
-                            <div class="portrait">
-                                <img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1576765673&di=e2b456cb073f7bbcaf01a8fdca9f4161&src=http://b-ssl.duitang.com/uploads/item/201603/15/20160315222418_HLBYJ.jpeg" alt="">
-                            </div>
+                            <router-link to="/avatar" tag="div" class="portrait">
+                                <img :src="userDetail.avatar" alt="">
+                            </router-link>
                             <div class="info">
-                                <div class="name">Heyinb</div>
+                                <div class="name">{{userDetail.name}}</div>
                                 <div class="speciality">
-                                    专长：家常菜
+                                    专长：{{userDetail.skill}}
                                 </div>
                             </div>
                         </div>
@@ -34,11 +34,11 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="notLogIn">
+            <router-link to="/user" tag="div" class="notLogIn" v-else>
                 <div class="notLigInBox">
                     请登录
                 </div>
-            </div> -->
+            </router-link>
        </div>
        <div class="shop flex-b-sac">
            <div class="shopBox flex-b-cc">
@@ -103,6 +103,8 @@
 </template>
 <script>
 import navBottom from "../components/nav"
+import axios from "axios"
+import qs from 'qs'
 export default {
     name: 'myInfo',
     components:{
@@ -110,8 +112,43 @@ export default {
     },
     data () {
         return {
-
+            username:'',
+            code:0,
+            userDetail:{}
         }
+    },
+    methods:{
+        // getCookie(username,code) {
+        //     if(this.code == 0){
+        //         let arrone = document.cookie.match(new RegExp("(^| )" + username + "=([^;]*)(;|$)"));
+        //         let arrtwo = document.cookie.match(new RegExp("(^| )" + code + "=([^;]*)(;|$)"));
+
+        //         this.username = arrone[2]
+        //         this.code = arrtwo[2]
+        //     }
+        //     // console.log("66cccff",this.username,this.code)
+        // },
+        getUser(){
+            if(this.$store.state.code == 1){
+                let user = {};
+                user.username = this.$store.state.username;
+                axios({
+                    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+                    method:'post',
+                    url:'api/user',
+                    data:qs.stringify(user)
+                }).then(this.getUserSucc)
+            }
+        },
+        getUserSucc(res){
+        //    console.log("usernameusername",res.data[0])
+            this.userDetail = res.data[0]
+        }
+    },
+    mounted(){
+    //   this.getCookie("username","code");
+      this.getUser();
+      console.log("aaaaaa",this.$store.state)
     }
 }
 </script>

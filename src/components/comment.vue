@@ -1,16 +1,16 @@
 <template>
    <div class='comment'>
-       <div class="commentBox ">
+       <div class="commentBox" v-for="(item,index) in pinglun" :key="index">
            <div class="left flex-box">
                 <div class="commentImg">
-                    <img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1576671417&di=c43db9b86207700901846f5601a86838&src=http://b-ssl.duitang.com/uploads/item/201603/15/20160315222418_HLBYJ.jpeg" alt="">
+                    <img :src="item.avatar" alt="">
                 </div>
                 
-                <div class="name simple-ellipsis1">风景线</div>
+                <div class="name simple-ellipsis1">{{item.name}}</div>
            </div>
            <div class="right">
                <div class="con simple-ellipsis1">
-                   分享了
+                   {{item.content}}
                </div>
            </div>
        </div>
@@ -22,6 +22,9 @@ export default {
     data () {
     return {
     }
+    },
+    props:{
+        pinglun:Array
     }
 }
 </script>

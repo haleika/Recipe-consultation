@@ -12,15 +12,15 @@
            </div>
            <div class="top-right iconfont">&#xe616;</div>
        </div>
-       <div class="slideshow">
-           <el-carousel height="150px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <h3 class="small">{{ item }}</h3>
-                </el-carousel-item>
-            </el-carousel>
+       <div class="slideshow" style="height:200px;width:100%;background:#fff;">
+           <mt-swipe :auto="4000" class="my_swiper">
+                <mt-swipe-item v-for="item in scrollData" :key="item.index">
+                    <img class="img" :src="item.img" alt="" style="width:100%;height:200px">
+                </mt-swipe-item>
+            </mt-swipe>
        </div>
        <div class="classify flex-b-sac">
-           <router-link to="classify" class="listItem" tag="div">
+           <router-link :to="{name:'classify',params:classList}" class="listItem" tag="div">
                <div class="item">
                    <img src="../assets/img/fenlei.jpg" alt="">
                </div>
@@ -54,7 +54,7 @@
                <div class="push-more">更多></div>
            </div>
            <div class="push-list">
-                <menu-card></menu-card>
+                <menu-card :recipeList = "recipeList"></menu-card>
            </div>
        </div>
         <nav-bottom />
@@ -63,16 +63,44 @@
 <script>
 import menuCard from "../components/menuCard"
 import navBottom from "../components/nav"
+import { Swipe, SwipeItem } from 'mint-ui'
+import axios from "axios"
 export default {
     name: 'home',
     components:{
         menuCard,
-        navBottom
+        navBottom,
+        "mtSwipe":Swipe,
+        "mtSwipeItem":SwipeItem
     },
     data () {
         return {
-            
+            scrollData:{},
+            recipeList:[],
+            classList:[]
         }
+    },
+    methods:{
+        getScrollData(){
+            axios.get('api/scroll').then(this.getScrollDataSuccs);
+        },
+        getScrollDataSuccs(res){
+            // console.log(res);
+            this.scrollData = res.data
+            
+            // console.log(this.scrollData);
+        },
+        getRecipeList(){
+            axios.get('api/recipe').then(this.getRecipeListSuccs)
+        },
+        getRecipeListSuccs(res){
+            this.recipeList = res.data
+            // console.log("8888",this.recipeList)
+        }
+    },
+    mounted(){
+        this.getScrollData();
+        this.getRecipeList();
     }
 }
 </script>
@@ -115,17 +143,12 @@ export default {
         }
     }
     .slideshow{
-        padding: 0 10px;
-        .el-carousel__item{
-            border-radius:10px; 
-            background-color: #66ccff;
-        }
         
         background-color: #f3f3f3;
     }
     .classify{
         background-color:#fff;
-        height: 406px/2;
+        height: 250px/2;
         .listItem{
             .item{
                 text-align: center;
@@ -141,7 +164,7 @@ export default {
         }
     }
     .push{
-        margin-bottom: 30px;
+        margin-bottom: 60px;
         .push-top{
             padding: 0 7px;
             .push-title{
@@ -168,6 +191,7 @@ export default {
         }
         .push-list{
             padding: 0 7px;
+            height: 100%;
             background-color: #f2f2f2;
         }
     }

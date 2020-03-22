@@ -34,7 +34,7 @@ export default {
             }
         },
         toHome(){
-            console.log("点击了返回")
+            // console.log("点击了返回")
             this.$router.push({
                 name:'home'
             })

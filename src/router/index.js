@@ -6,13 +6,18 @@ import classify from '@/pages/classify'
 import myInfo from '@/pages/myInfo'
 import search from '@/pages/search'
 import collection from '@/pages/collection'
+import avatar from '@/pages/avatar'
+import user from '@/pages/user'
+import login from '@/components/login'
+import regist from '@/components/regist'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    { path:'/',redirect:'/home' },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: home
     },
@@ -40,6 +45,29 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
+    },
+    {
+      path: '/avatar',
+      name: 'avatar',
+      component: avatar
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: user,
+      redirect:'/user/login',
+      children:[
+        {
+          path:"login",
+          name:login,
+          component: login
+        },
+        {
+          path:"regist",
+          name:regist,
+          component: regist
+        }
+      ]
     }
   ]
 })

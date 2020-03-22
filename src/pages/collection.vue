@@ -41,12 +41,20 @@ export default {
 .collection{
     margin-bottom: 100px;
     .top{
+        position: fixed;
+        top: 0;
+
+        width: 100%;
         text-align: center;
         line-height: 50px;
         height: 50px;
+        z-index: 2;
+
+        background-color: #fff;
         // box-shadow: 0 1px 40px 1px #ccc;
     }
     .hasLoggedOn{
+        margin-top: 50px;
         .collectList{
             .collectItem{
                 margin: 20px 10px;
@@ -89,6 +97,7 @@ export default {
         }
     }
     .notLogIn{
+        margin-top: 50px;
         .text{
             margin-top: 200px;
             text-align: center;

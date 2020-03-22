@@ -1,12 +1,19 @@
 <template>
    <div class='menuCard  flex-box fw-wr'>
-       <router-link tag="div" to="/detail"  class="card" v-for="i in 3" :key="i">
+       <router-link
+            tag="div"
+            :to="{name: 'detail', query: { id : item.id }}"
+            class="card"
+            v-for="item in recipeList"
+            :key="item.id"
+            @click="pushData()"
+        >
            <div class="card-img">
-               <img src="https://img.alicdn.com/imgextra/i1/4057485658/O1CN01wXWjcg1rfPSHPXE1G_!!4057485658.jpg" alt="">
+               <img :src="item.coverimg" alt="">
            </div>
            <div class="text">
-               <div class="name simple-ellipsis1">广州肠粉{{i}}</div>
-               <div class="author simple-ellipsis1">归家小厨</div>
+               <div class="name simple-ellipsis1">{{item.title}}</div>
+               <div class="author simple-ellipsis1">{{item.name}}</div>
            </div>
        </router-link>
    </div>
@@ -15,8 +22,16 @@
 export default {
     name: 'menuCard',
     data () {
-    return {
-    }
+        return {
+        }
+    },
+    props:{
+        recipeList:Array
+    },
+    methods:{
+        pushData(res){
+            console.log('111')
+        }
     }
 }
 </script>
@@ -37,7 +52,7 @@ export default {
     .card-img{
         img{
             width: 100%;
-            height: 100%;;
+            height: 110px;;
         }
     }
     .text{

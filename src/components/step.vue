@@ -1,13 +1,15 @@
 <template>
    <div class='step'>
-       <div class="text">
-           <span style="">步骤1</span>
-           <span style="font-size:1px;color:#ccc">/36</span>
+       <div v-for="(item,index) in shipuList" :key="index">
+           <div class="text">
+                <span style="">步骤 <span style="color:orange">{{index}}</span></span>
+                <span style="font-size:1px;color:#ccc">{{shipuList.length}}</span>
+            </div>
+            <div class="stepImg">
+                <img :src="item.img" alt="">
+            </div>
+            <div class="intro">{{item.text}}</div>
        </div>
-       <div class="stepImg">
-           <img src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike150%2C5%2C5%2C150%2C50/sign=9780b27564061d95694b3f6a1a9d61b4/0b46f21fbe096b63c8a5951d06338744ebf8ac3b.jpg" alt="">
-       </div>
-       <div class="intro">肠粉可以这样更好吃</div>
    </div>
 </template>
 <script>
@@ -15,7 +17,11 @@ export default {
     name: 'step',
     data () {
         return {
+            
         }
+    },
+    props:{
+        shipuList:Array
     }
 }
 </script>

@@ -9,14 +9,10 @@
            </div>
        </div>
        <div class="ingredientBottom">
-           <ul>
+           <ul v-for="(item,index) in Ingredient" :key="index">
                <li class="flex-b-sbc">
-                   <div class="name ">大米</div>
-                   <div class="kg">120g</div>
-               </li>
-               <li class="flex-b-sbc">
-                   <div class="name ">大米</div>
-                   <div class="kg">120g</div>
+                   <div class="name ">{{item.Ingredients}}</div>
+                   <div class="kg">{{item.Dosage}}</div>
                </li>
            </ul>
        </div>
@@ -28,6 +24,9 @@ export default {
     data () {
     return {
     }
+    },
+    props:{
+        Ingredient:Array
     }
 }
 </script>

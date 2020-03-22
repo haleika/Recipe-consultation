@@ -1,11 +1,11 @@
 {
-  "name": "kc",
+  "name": "shipu",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "HeyinB <heyinb_01@163.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress  --config build/webpack.dev.conf.js --port 8080 --host 192.168.106.1",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
@@ -16,6 +16,7 @@
     "element-ui": "^2.11.1",
     "font-awesome": "^4.7.0",
     "mint-ui": "^2.2.13",
+    "photoclip": "^3.4.8",
     "qs": "^6.8.0",
     "vue": "^2.5.2",
     "vue-js-grid": "^1.0.1",
@@ -61,7 +62,7 @@
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.10",
     "vuex": "^3.1.1",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",

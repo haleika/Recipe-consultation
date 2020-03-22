@@ -3,7 +3,7 @@
        <div
             v-for="item in list"
             :key="item.icon"
-            :class="$store.state.tabbar == item.page?'tabbarColor':''"
+            :class="pageThis == item.page?'tabbarColor':''"
             @click="toPage(item.page)"
         >
            <div
@@ -22,32 +22,48 @@ export default {
             list:[{
                 icon:`&#xe63b;`,
                 text:"首页",
-                page:'home'
+                page:'/home'
             },
             {
                 icon:'&#xe64b;',
                 text:"食话",
-                page:'topic'
+                page:'/topic'
             },
             {
                 icon:'&#xe60b;',
                 text:"收藏",
-                page:'collection'
+                page:'/collection'
             },{
                 icon:'&#xe614;',
                 text:"我的",
-                page:'myInfo'
-            }]
+                page:'/myInfo'
+            }],
+            pageThis:this.$route.path,
+            
         }
     },
     methods:{
         toPage(page){
-            // console.log(text)
             this.$router.push({
-                name:page
-            }),
-            this.$store.commit("SET_PAGE",page)
-        }
+                name:page.split('/')[1]
+            })
+            // this.$store.commit("SET_PAGE",page.split('/')[1])
+        },
+        getCookie(username,code) {
+            let mydata = {};
+                let arrone = document.cookie.match(new RegExp("(^| )" + username + "=([^;]*)(;|$)"));
+                let arrtwo = document.cookie.match(new RegExp("(^| )" + code + "=([^;]*)(;|$)"));
+
+                mydata.username = arrone[2]
+                mydata.code = arrtwo[2]
+            
+            this.$store.commit("SET_USER",mydata)
+            // console.log("66cccff",this.username,this.code)
+        },
+    },
+    mounted(){
+        // console.log(this.$route.path)
+      this.getCookie("username","code");
     }
 }
 </script>

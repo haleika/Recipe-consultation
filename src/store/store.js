@@ -2,7 +2,10 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 const state={//要设置的全局访问的state对象
-  tabbar:"home"
+  tabbar:"home",
+  detailData:{},
+  username:'',
+  code:''
 };
 const getters = {
 
@@ -10,6 +13,11 @@ const getters = {
 const mutations = {
   SET_PAGE(state,page){
     state.tabbar = page;
+  },
+  SET_USER(state,data){
+    // console.log("viexxxx",data)
+    state.username = data.username;
+    state.code = data.code
   }
 }
 
