@@ -1,9 +1,9 @@
 <template>
   <div>
     <div id="clipArea"></div>
-<input type="file" id="file">
-<button id="clipBtn">截取</button>
-<div id="view"></div>
+	<input type="file" id="file">
+	<button id="clipBtn">截取</button>
+	<div id="view"></div>
   </div>
 </template>
 
@@ -13,7 +13,6 @@ export default {
   name: 'Avatar',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
   methods:{
