@@ -2,7 +2,7 @@
    <div class='step'>
        <div v-for="(item,index) in shipuList" :key="index">
            <div class="text">
-                <span style="">步骤 <span style="color:orange">{{index}}</span></span>
+                <span style="">步骤 <span style="color:orange">{{index+1}}</span></span>
                 <span style="font-size:1px;color:#ccc">{{shipuList.length}}</span>
             </div>
             <div class="stepImg">

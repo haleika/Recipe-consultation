@@ -30,6 +30,7 @@ export default {
 </script>
 <style lang='less' scoped>
 .comment{
+    padding:20px 0 60px 0;
     .commentBox{
         padding:20px 0;
         .left{

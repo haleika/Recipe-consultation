@@ -98,6 +98,8 @@
                </ul>
            </div>
        </div>
+       
+	    <input type="file" id="file" ref="inp"  @change="getFile">
         <nav-bottom />
    </div>
 </template>
@@ -143,12 +145,24 @@ export default {
         getUserSucc(res){
         //    console.log("usernameusername",res.data[0])
             this.userDetail = res.data[0]
+        },
+        // 获取base6编码的
+        getFile (e) {
+            console.log(this.$refs.inp)
+            let file = this.$refs.inp.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                console.log(reader.result);
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         }
     },
     mounted(){
     //   this.getCookie("username","code");
       this.getUser();
-      console.log("aaaaaa",this.$store.state)
+    //   console.log("aaaaaa",this.$store.state)
     }
 }
 </script>

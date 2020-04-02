@@ -2,29 +2,30 @@
    <div class='collection'>
        <div class="top">收藏的菜谱</div>
        <!-- 已经登录 -->
-       <div class="hasLoggedOn">
+       <div class="hasLoggedOn" v-if="this.$store.state.username">
            <div class="collectList">
-               <div class="collectItem flex-box" v-for="i in 6" :key="i">
+               <router-link :to="{name: 'detail', query: { id : i.id }}" tag="div" class="collectItem flex-box" v-for="(i,index) in collect" :key="index">
                    <div class="itemLeft">
-                       <img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1576671417&di=c43db9b86207700901846f5601a86838&src=http://b-ssl.duitang.com/uploads/item/201603/15/20160315222418_HLBYJ.jpeg" class="itemLeftImg" alt="">
+                       <img :src="i.image" class="itemLeftImg" alt="">
                    </div>
                    <div class="itemRight">
-                       <div class="itemRightTitle">鸡蛋西红柿打卤面</div>
-                       <div class="itemRightMid">安迪的小厨房</div>
+                       <div class="itemRightTitle">{{i.name}}</div>
+                       <div class="itemRightMid">{{i.author}}</div>
                        <div class="itemRightBottom">删除</div>
                    </div>
-               </div>
+               </router-link>
            </div>
        </div>
        <!-- 还未登录 -->
-       <!-- <div class="notLogIn">
+       <div class="notLogIn" v-else>
            <div class="text">你还未登录，请先登录</div>
-       </div> -->
+       </div>
         <nav-bottom />
    </div>
 </template>
 <script>
 import navBottom from "../components/nav"
+import axios from "axios"
 export default {
     name: 'home',
     components:{
@@ -32,8 +33,20 @@ export default {
     },
     data () {
         return {
-            
+            collect:''
         }
+    },
+    methods:{
+        // 获取食谱
+        getCollect(){
+            axios.get("api/collect/"+this.$store.state.username).then(this.getCollectSucc)
+        },
+        getCollectSucc(res){
+            this.collect = res.data
+        },
+    },
+    mounted(){
+        this.getCollect()
     }
 }
 </script>

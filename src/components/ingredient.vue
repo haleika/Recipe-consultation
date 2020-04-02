@@ -4,9 +4,6 @@
            <div class="left">
                需要食材
            </div>
-           <div class="right">
-               加入菜篮子
-           </div>
        </div>
        <div class="ingredientBottom">
            <ul v-for="(item,index) in Ingredient" :key="index">
