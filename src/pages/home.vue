@@ -1,7 +1,7 @@
 <template>
    <div class='home'>
        <div class="home-top flex-box flex-b-sac">
-           <div class="top-left iconfont">&#xe644;</div>
+           <router-link to="/creation" tag='div' class="top-left iconfont">&#xe644;</router-link>
            <div class="top-search flex-box">
                <div class="search-box">
                    <router-link to="/search" class="search-item">

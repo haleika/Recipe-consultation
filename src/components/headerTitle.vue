@@ -22,8 +22,8 @@ export default {
 </script>
 <style lang='less' scoped>
 .headerTitle{
-
     height: 60px;
+    position: relative;
     .iconfont{
         margin-left: 20px;
 

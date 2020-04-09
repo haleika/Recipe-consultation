@@ -10,6 +10,8 @@ import avatar from '@/pages/avatar'
 import user from '@/pages/user'
 import login from '@/components/login'
 import regist from '@/components/regist'
+import pinglun from '@/pages/pinglun'
+import creation from '@/pages/creation'
 
 Vue.use(Router)
 
@@ -68,6 +70,16 @@ export default new Router({
           component: regist
         }
       ]
+    },
+    {
+      path: '/pinglun',
+      name: 'pinglun',
+      component: pinglun
+    },
+    {
+      path: '/creation',
+      name: 'creation',
+      component: creation
     }
   ]
 })

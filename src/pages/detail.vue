@@ -49,7 +49,7 @@
             <div class="comment">
                 <div class="commentTop flex-b-sbc">
                     <div class="left">评论</div>
-                    <div class="right">写评论</div>
+                    <router-link :to="{name: 'pinglun',query: {id:this.$route.query.id}}" tag="div" class="right">写评论</router-link>
                 </div>
                 <div class="commentBottom">
                     <comment :pinglun="pinglun"/>
