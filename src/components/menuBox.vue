@@ -10,17 +10,20 @@
             />
        </div>
        <div>
-           <input type="text" name="" id="">
+           <input type="text" name="" id="" v-model="steptInfo">
        </div>
    </div>
 </template>
 <script>
+import axios from "axios"
+import qs from 'qs'
 export default {
     name: 'menuBox',
     data() {
         return {
             fileList: [
-            ]
+            ],
+            steptInfo:''
         }
     },
     props:{
@@ -31,15 +34,24 @@ export default {
             console.log(file)
             var reader = new FileReader();
             reader.onloadend = function () {
-                console.log(reader.result);
+                // console.log(reader.result);
             }
             if (file) {
                 reader.readAsDataURL(file);
             }
             return true;
         },
-        lll(){
-            console.log('kkk')
+        createStep(){
+            let step = {}
+            step.text = this.steptInfo
+            step.img = this.fileList[0].content
+    console.log(stept)
+            // axios({
+            //     headers:{'Content-Type':'application/x-www-form-urlencoded'},
+            //     method:'post',
+            //     url:'api/createStep',
+            //     data:qs.stringify(step)
+            // }).then(res=>console.log("创建食谱",res))
         }
     }
 }

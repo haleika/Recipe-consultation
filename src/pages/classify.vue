@@ -25,7 +25,7 @@
                     <li class="right-item" ref="rightItem" v-for="(item, index) in classList" :key="index">
                         <div class="title">{{item.classname}}</div>
                         <ul>
-                            <li>
+                            <router-link :to="{name: 'classData', query: { tag : item.itemone }}" tag="div">
                                 <div class="data-wrapper">
                                     <div class="data flex-b-sac">
                                         <div class="data-text">
@@ -36,8 +36,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
+                            </router-link>
+                            <router-link :to="{name: 'classData', query: { tag : item.itemtwo }}" tag="div">
                                 <div class="data-wrapper">
                                     <div class="data flex-b-sac">
                                         <div class="data-text">
@@ -48,8 +48,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
+                            </router-link>
+                            <router-link :to="{name: 'classData', query: { tag : item.itemthree }}" tag="div">
                                 <div class="data-wrapper">
                                     <div class="data flex-b-sac">
                                         <div class="data-text">
@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </router-link>
                         </ul>
                     </li>
                 </ul>
@@ -166,26 +166,12 @@ export default {
     }
   },
   computed: {
-    // currentIndex () {
-    //   // 当用户在滚动时，需要计算当前滚动距离在哪个(右边li块)区间内，并拿到它的 `index`
-    //   const { scrollY, rightTops } = this
-    //   // console.log('scrollY: ', scrollY)
-    //   // console.log('rightTops: ', rightTops)
-    //   let index = rightTops.findIndex((height, index) => {
-    //     return scrollY >= rightTops[index] && scrollY < rightTops[index + 1]
-    //   })
-    // //   if (scrollY > rightTops[index] + 50) {
-    // //     index++
-    // //   }
-    // //   console.log('currentIndex: ', index)
-    //   return index
-    // },
     
   },
   methods: {
     selectLeft (index, event) {
       // 添加`$event`是为了区分原生点击事件还是 better-scroll派发的事件
-      console.log('selectLeft - index: ', index)
+      // console.log('selectLeft - index: ', index)
       this.currentIndex = index
       if (!event._constructed) {
         return
@@ -210,19 +196,19 @@ export default {
       })
     },
     // 获取分类
-        getClassList(){
-            axios.get('api/class').then(this.getClassListSuccs)
-        },
-        getClassListSuccs(res){
-            this.classList = res.data
-            console.log(res)
-        },
+    getClassList(){
+        axios.get('api/class').then(this.getClassListSuccs)
+    },
+    getClassListSuccs(res){
+        this.classList = res.data
+        // console.log(res)
+    },
   },
   mounted () {
     // this.$nextTick(() => {
     //   this._calculateHeight()
     // })
-    console.log(this.$route.params)
+    // console.log(this.$route.params)
     this.getClassList()
   }
 }

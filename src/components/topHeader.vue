@@ -1,5 +1,5 @@
 <template>
-   <div class='topHeader' @click="toHome">
+   <div class='topHeader' @click=" $router.go(-1)">
        <div class="flex-b-sbc" :class="[isScroll?s1:s2]">
            <div class="left iconfont">&#xe62f;</div>
            <div class="icon flex-b-cc" >
@@ -33,12 +33,12 @@ export default {
                 this.isScroll = false
             }
         },
-        toHome(){
-            // console.log("点击了返回")
-            this.$router.push({
-                name:'home'
-            })
-        }
+        // toHome(){
+        //     // console.log("点击了返回")
+        //     this.$router.push({
+        //         name:'home'
+        //     })
+        // }
     }
 }
 </script>
@@ -46,7 +46,7 @@ export default {
 .topHeader{
     position: fixed;
     top: 0;
-
+    z-index: 999;
     width: 100%;
     .bgw{
         background-color: #fff;

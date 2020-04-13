@@ -1,25 +1,22 @@
 <template>
-   <div class='ingredient'>
-       <div class="ingredientTop flex-b-sbc">
-           <div class="left">
-               需要食材
-           </div>
-       </div>
-       <div class="ingredientBottom">
+   <van-collapse v-model="activeNames" accordion  class='ingredient'>
+       <van-collapse-item title="需要食材" size="large" name="1" class="ingredientBottom">
            <ul v-for="(item,index) in Ingredient" :key="index">
                <li class="flex-b-sbc">
                    <div class="name ">{{item.Ingredients}}</div>
                    <div class="kg">{{item.Dosage}}</div>
                </li>
            </ul>
-       </div>
-   </div>
+       </van-collapse-item>
+   </van-collapse>
 </template>
 <script>
+import { Collapse, CollapseItem } from 'vant';
 export default {
     name: 'ingredient',
     data () {
     return {
+        activeNames: ['1']
     }
     },
     props:{
@@ -29,7 +26,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .ingredient{
-    padding: 40px 0;
+    margin: 20px 0;
     background-color: #fff;
     .ingredientTop{
         .left{
@@ -42,10 +39,9 @@ export default {
         }
     }
     .ingredientBottom{
-        margin: 0 10px;
         ul{
             li{
-                margin-top: 60px;
+                margin-top: 20px;
             }
         }
     }

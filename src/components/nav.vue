@@ -54,10 +54,12 @@ export default {
                 let arrone = document.cookie.match(new RegExp("(^| )" + username + "=([^;]*)(;|$)"));
                 let arrtwo = document.cookie.match(new RegExp("(^| )" + code + "=([^;]*)(;|$)"));
 
-                mydata.username = arrone[2]
-                mydata.code = arrtwo[2]
+                if(arrone){
+                    mydata.username = arrone[2]
+                    mydata.code = arrtwo[2]
             
-            this.$store.commit("SET_USER",mydata)
+                    this.$store.commit("SET_USER",mydata)
+                }
             // console.log("66cccff",this.username,this.code)
         },
     },

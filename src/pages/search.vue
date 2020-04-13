@@ -1,32 +1,51 @@
 <template>
    <div class='search'>
-       <div class="header-title">
-           <router-link to="/">返回</router-link>
-           搜索
+       <div>
+           <header-title :title="title"/>
        </div>
        <div class="search-top">
-           <input type="text" class="search-text">
-           <span>取消</span>
+           <van-search v-model="value" placeholder="请输入搜索关键词" @search="onSearch"/>
        </div>
-       <div class="search-result" v-for="i in 6" :key="i">
-           <div class="result-item flex-box">
+       <div class="search-result" v-for="(i,index) in list" :key="index">
+           <router-link :to="{name: 'detail', query: { id : i.id }}" tag="div" class="result-item flex-box">
                <div class="result-item-left">
-                   <img src="https://img.alicdn.com/imgextra/i1/4057485658/O1CN01wXWjcg1rfPSHPXE1G_!!4057485658.jpg" alt="">
+                   <img :src="i.coverimg" alt="">
                </div>
                <div class="result-item-right">
-                   <div class="right-title">肠粉</div>
-                   <div class="right-con simple-ellipsis2">这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个这是一个</div>
+                   <div class="right-title">{{i.title}}</div>
+                   <div class="right-con simple-ellipsis2">{{i.intro}}</div>
                </div>
-           </div>
+           </router-link>
        </div>
    </div>
 </template>
 <script>
+import { Search } from 'vant';
+import axios from "axios"
+import qs from 'qs'
+import headerTitle from '../components/headerTitle'
+
 export default {
     name: 'search',
+    components:{
+        headerTitle
+    },
     data () {
-    return {
-    }
+        return {
+            value: '',
+            title:'搜索',
+            list:''
+        }
+    },
+    methods:{
+        onSearch(val) {
+            console.log(val)
+            axios.get("api/search/"+this.value).then(this.getLsitSucc)
+        },
+        getLsitSucc(res){
+            console.log(res.data)
+            this.list = res.data
+        },
     }
 }
 </script>
@@ -61,6 +80,13 @@ export default {
             }
             .result-item-right{
                 width: 220px;
+                .right-title{
+                    margin-bottom: 20px;
+                }
+                .right-con{
+                    font-size: 13px;
+                    color: #ccc;
+                }
             }
         }
     }

@@ -1,8 +1,8 @@
 <template>
    <div class='headerTitle flex-box'>
-        <router-link to="/" tag="div" class="iconfont flex-b-cc">
+        <div  @click=" $router.go(-1)"  class="iconfont flex-b-cc">
             &#xe62f;
-        </router-link>
+        </div>
         <div class="titleText">
             {{title}}
         </div>
@@ -24,6 +24,7 @@ export default {
 .headerTitle{
     height: 60px;
     position: relative;
+    background-color: #fff;
     .iconfont{
         margin-left: 20px;
 

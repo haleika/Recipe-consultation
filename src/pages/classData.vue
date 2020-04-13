@@ -1,52 +1,50 @@
 <template>
    <div class='collection'>
-       <div class="top">收藏的菜谱</div>
+       <header-title :title="title"/>
        <!-- 已经登录 -->
-       <div class="hasLoggedOn" v-if="this.$store.state.username">
+       <div class="hasLoggedOn">
            <div class="collectList">
-               <router-link :to="{name: 'detail', query: { id : i.id }}" tag="div" class="collectItem flex-box" v-for="(i,index) in collect" :key="index">
+               <router-link :to="{name: 'detail', query: { id : i.id }}" tag="div" class="collectItem flex-box" v-for="(i,index) in list" :key="index">
                    <div class="itemLeft">
-                       <img :src="i.image" class="itemLeftImg" alt="">
+                       <img :src="i.coverimg" class="itemLeftImg" alt="">
                    </div>
                    <div class="itemRight">
-                       <div class="itemRightTitle">{{i.name}}</div>
-                       <div class="itemRightMid">{{i.author}}</div>
-                       <div class="itemRightBottom">删除</div>
+                       <div class="itemRightTitle">{{i.title}}</div>
+                       <div class="itemRightMid">{{i.name}}</div>
                    </div>
                </router-link>
            </div>
        </div>
-       <!-- 还未登录 -->
-       <div class="notLogIn" v-else>
-           <div class="text">你还未登录，请先登录</div>
-       </div>
-        <nav-bottom />
    </div>
 </template>
 <script>
-import navBottom from "../components/nav"
+import headerTitle from "../components/headerTitle"
 import axios from "axios"
 export default {
-    name: 'collection',
+    name: 'classData',
     components:{
-        navBottom
+        headerTitle
     },
     data () {
         return {
-            collect:''
+            list:'',
+            title:this.$route.query.tag
         }
     },
     methods:{
         // 获取食谱
-        getCollect(){
-            axios.get("api/collect/"+this.$store.state.username).then(this.getCollectSucc)
+        getlist(){
+            axios.get("api/class/"+this.title).then(this.getlistSucc)
         },
-        getCollectSucc(res){
-            this.collect = res.data
+        getlistSucc(res){
+            this.list = res.data
+            console.log(res)
+            console.log(this.list)
+
         },
     },
     mounted(){
-        this.getCollect()
+        this.getlist()
     }
 }
 </script>
@@ -67,7 +65,6 @@ export default {
         // box-shadow: 0 1px 40px 1px #ccc;
     }
     .hasLoggedOn{
-        margin-top: 50px;
         .collectList{
             .collectItem{
                 margin: 20px 10px;

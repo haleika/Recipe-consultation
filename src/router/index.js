@@ -12,6 +12,9 @@ import login from '@/components/login'
 import regist from '@/components/regist'
 import pinglun from '@/pages/pinglun'
 import creation from '@/pages/creation'
+import change from '@/pages/change'
+import classData from '@/pages/classData'
+
 
 Vue.use(Router)
 
@@ -80,6 +83,16 @@ export default new Router({
       path: '/creation',
       name: 'creation',
       component: creation
+    },
+    {
+      path: '/change',
+      name: 'change',
+      component: change
+    },
+    {
+      path: '/classData',
+      name: 'classData',
+      component: classData
     }
   ]
 })

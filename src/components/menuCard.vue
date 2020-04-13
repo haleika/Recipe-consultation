@@ -1,5 +1,5 @@
 <template>
-   <div class='menuCard  flex-box fw-wr'>
+   <div class='menuCard flex-box fw-wr'>
        <router-link
             tag="div"
             :to="{name: 'detail', query: { id : item.id }}"
@@ -9,7 +9,7 @@
             @click="pushData()"
         >
            <div class="card-img">
-               <img :src="item.coverimg" alt="">
+               <img :src="item.coverimg" alt="" v-lazy="item.coverimg"> 
            </div>
            <div class="text">
                <div class="name simple-ellipsis1">{{item.title}}</div>

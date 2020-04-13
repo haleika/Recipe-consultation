@@ -1,20 +1,27 @@
 <template>
    <div class='pinglun'>
-       <input type="text" v-model="pinglun">
-       <div @click="commentOn">点击</div>
-       {{pinglun}}
+       <header-title :title="title"/>
+       <div class="con">
+           <input type="text" v-model="pinglun" class="con-input">
+           <van-button  @click="commentOn" type="primary" size="large" round class="button-sub">发表</van-button>
+       </div>
    </div>
 </template>
 <script>
+import headerTitle from "../components/headerTitle"
 import axios from "axios"
 import qs from 'qs'
 export default {
     name: 'pinglun',
     data () {
-    return {
-        pinglun:"",
-        userDetail:{}
-    }
+        return {
+            pinglun:"",
+            userDetail:{},
+            title:'评论'
+        }
+    },
+    components:{
+        headerTitle
     },
     methods:{
        getUser(username){
@@ -60,4 +67,32 @@ export default {
 }
 </script>
 <style lang='less' scoped>
+.pinglun{
+    .top{
+        position: fixed;
+        top: 0;
+
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        line-height: 50px;
+        height: 50px;
+        z-index: 2;
+
+        background-color: #fff;
+        // box-shadow: 0 1px 40px 1px #ccc;
+    }
+    .con{
+        text-align: center;
+        margin-top: 50px;
+        .con-input{
+            margin-top: 10px;
+            width: 90%;
+            height: 30px;
+        }
+        .button-sub{
+            margin-top: 70px;
+        }
+    }
+}
 </style>
