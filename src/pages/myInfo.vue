@@ -26,6 +26,7 @@
                关于我们
            </div>
        </div>
+	    <input type="file" id="file" ref="inp"  @change="getFile">
         <nav-bottom />
    </div>
 </template>
@@ -63,17 +64,17 @@ export default {
             this.userDetail = res.data[0]
         },
         // 获取base6编码的
-        // getFile (e) {
-        //     console.log(this.$refs.inp)
-        //     let file = this.$refs.inp.files[0];
-        //     var reader = new FileReader();
-        //     reader.onloadend = function () {
-        //         console.log(reader.result);
-        //     }
-        //     if (file) {
-        //         reader.readAsDataURL(file);
-        //     }
-        // }
+        getFile (e) {
+            console.log(this.$refs.inp)
+            let file = this.$refs.inp.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                console.log(reader.result);
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
     },
     mounted(){
     //   this.getCookie("username","code");
