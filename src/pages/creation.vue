@@ -141,13 +141,13 @@ export default {
 
             console.log("this.shicaiList",this.shicaiList)
             axios.post('api/createShicai', qs.stringify(this.shicaiList))
-                        .then(function (response) {
+                    .then(function (response) {
                             // console.log(response);
-                        })
+                })
             axios.post('api/createStep', qs.stringify(this.buzhouList))
-                        .then(function (response) {
+                    .then(function (response) {
                             // console.log(response);
-                        })
+                })
 
         },
         beforeRead(file) {

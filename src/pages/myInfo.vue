@@ -2,12 +2,12 @@
    <div class='myInfo'>
        <div class="myInfoData">
             <div class="hasLoggedOn" v-if="this.$store.state.code == 1">
-                <router-link to="/avatar" tag="div" class="portrait">
+                <div class="portrait">
                     <div class="portrait-img">
                         <img :src="userDetail.avatar" alt="">
                     </div>
                     <div class="portrait-name">{{userDetail.name}}</div>
-                </router-link>
+                </div>
             </div>
             <router-link to="/user" tag="div" class="notLogIn" v-else>
                 <div class="notLigInBox">
@@ -26,7 +26,7 @@
                关于我们
            </div>
        </div>
-	    <input type="file" id="file" ref="inp"  @change="getFile">
+	    <!-- <input type="file" id="file" ref="inp"  @change="getFile"> -->
         <nav-bottom />
    </div>
 </template>

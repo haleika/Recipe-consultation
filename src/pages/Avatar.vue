@@ -22,7 +22,6 @@ export default {
     var pc = new PhotoClip('#clipArea', {
 		size: [260, 260],
 		outputSize: 640,
-		//adaptive: ['60%', '80%'],
 		file: '#file',
 		view: '#view',
 		ok: '#clipBtn',

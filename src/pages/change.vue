@@ -24,21 +24,22 @@
                </div>
            </div>
        </div>
-        <van-overlay :show="show">
-            <div class="wrapper">
-                <div class="block"  @click.stop>
-                    
-                    <div id="clipArea"></div>
-                    <button id="clipBtn">截取</button>
-                    <button id="clipSure" @click="clipSure">确定</button>
-	                <div id="view"></div>
-                </div>
+        <div class="wrapper" v-show="show">
+            <div class="block">
+                
+                <div id="clipArea"></div>
+                <button id="clipBtn">截取</button>
+                <button id="clipSure" @click="clipSure">确定</button>
+                <div id="view"></div>
             </div>
-        </van-overlay>
+        </div>
+        <van-button style="margin-top:20px;" type="primary" color="#feae4c" size="large" @click="changeInfo">確定</van-button>
    </div>
 </template>
 <script>
 import { Overlay } from 'vant';
+import { Button } from 'vant';
+import { Notify } from 'vant';
 import navBottom from "../components/nav"
 import headerTitle from '../components/headerTitle'
 import PhotoClip from 'photoclip'
@@ -90,6 +91,17 @@ export default {
         clipSure(){
             this.userDetail.avatar = this.temporary
             this.show = false
+        },
+        changeInfo(){
+            let changeInfo = {};
+            changeInfo.username = this.userDetail.username;
+            changeInfo.avatar = this.userDetail.avatar;
+            changeInfo.name = this.userDetail.name;
+            changeInfo.skill = this.userDetail.skill
+            axios.post('api/change', qs.stringify(changeInfo))
+                        .then(function (response) {
+            })
+            Notify({ type: 'success', message: '修改成功' });
         }
     },
     mounted(){
@@ -120,7 +132,6 @@ export default {
                 alert(msg);
             }
         });
-
         // 加载的图片必须要与本程序同源，否则无法截图
         // pc.load('img/mm.jpg');
     }
@@ -151,6 +162,18 @@ export default {
             cursor: pointer;
             opacity: 0;
         }
+    }
+}
+.wrapper{
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    .block{
+        overflow: hidden;
+        width: 100%;
     }
 }
 #clipArea {

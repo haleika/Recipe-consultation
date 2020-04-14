@@ -267,7 +267,7 @@ export default {
             .list-box{
                 margin-top: 30px;
                 .list-item{
-                    margin-right: 50px;
+                    margin-right: 30px;
                     background-color: #f7f7f7;
                     .item-img{
                         img{

@@ -4,15 +4,21 @@
        <!-- 已经登录 -->
        <div class="hasLoggedOn" v-if="this.$store.state.username">
            <div class="collectList">
-               <router-link :to="{name: 'detail', query: { id : i.id }}" tag="div" class="collectItem flex-box" v-for="(i,index) in collect" :key="index">
-                   <div class="itemLeft">
-                       <img :src="i.image" class="itemLeftImg" alt="">
-                   </div>
-                   <div class="itemRight">
-                       <div class="itemRightTitle">{{i.name}}</div>
-                       <div class="itemRightMid">{{i.author}}</div>
-                       <div class="itemRightBottom">删除</div>
-                   </div>
+               <router-link :to="{name: 'detail', query: { id : i.id }}" tag="div" v-for="(i,index) in collect" :key="index">
+                    <van-swipe-cell>
+                        <div class="collectItem flex-box">
+                            <div class="itemLeft">
+                                <img :src="i.image" class="itemLeftImg" alt="">
+                            </div>
+                            <div class="itemRight">
+                                <div class="itemRightTitle">{{i.name}}</div>
+                                <div class="itemRightMid">{{i.author}}</div>
+                            </div>
+                        </div>
+                        <template #right>
+                            <van-button @click="showDialog(i.id)" square type="danger" text="删除"  class="delete-button" />
+                        </template>
+                    </van-swipe-cell>
                </router-link>
            </div>
        </div>
@@ -25,7 +31,10 @@
 </template>
 <script>
 import navBottom from "../components/nav"
+import { SwipeCell } from 'vant';
+import { Dialog } from 'vant';
 import axios from "axios"
+import qs from 'qs'
 export default {
     name: 'collection',
     components:{
@@ -33,7 +42,8 @@ export default {
     },
     data () {
         return {
-            collect:''
+            collect:'',
+            ll:'aaa'
         }
     },
     methods:{
@@ -44,6 +54,20 @@ export default {
         getCollectSucc(res){
             this.collect = res.data
         },
+        showDialog(i){
+            Dialog.confirm({
+                message: '确定删除吗？',
+            }).then(() => {
+                let delect = {}
+                delect.username = this.$store.state.username;
+                delect.id = i;
+                axios.post('api/delect', qs.stringify(delect))
+                    .then(function (response) {
+                    // console.log(response);
+                })
+                location.reload();
+            });
+        }
     },
     mounted(){
         this.getCollect()
@@ -117,4 +141,7 @@ export default {
         }
     }
 }
+.delete-button {
+    height: 100%;
+  }
 </style>

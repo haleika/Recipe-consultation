@@ -3,7 +3,7 @@
        
        <div class="top">食话</div>
        <!-- <van-notice-bar text="全新上市的菜谱功能，发表可得现金大奖" left-icon="volume-o" :scrollable="false"/> -->
-        <div style="background:#f7f7f7">
+        <div style="background:#f7f7f7;height:100%">
             <van-pull-refresh
                 v-model="isLoading"
                 success-text="刷新成功"
@@ -16,13 +16,21 @@
                         :key="index"
                     >
                         <div class="title simple-ellipsis1">{{i.title}}</div>
-                        <div class="content simple-ellipsis1">{{i.content}}</div>
+                        <div class="content simple-ellipsis1">{{i.content}}6666</div>
                         <div class="img">
                             <img :src="i.img" alt="">
                         </div>
                     </router-link>
                 </div>
             </van-pull-refresh>
+        </div>
+        <div class="createTopic" id="moveDiv"
+          @mousedown="down" @touchstart="down"
+          @mousemove="move" @touchmove.prevent="move"   
+          @mouseup="end" @touchend="end"
+          @click="createdTopic"
+        >
+            <img src="../assets/img/write.png" alfunct="">
         </div>
         <nav-bottom />
    </div>
@@ -31,8 +39,9 @@
 import navBottom from "../components/nav"
 import { PullRefresh } from 'vant';
 import { Toast } from 'vant';
-import axios from "axios"
 import { NoticeBar } from 'vant';
+import { Loading } from 'vant';
+import axios from "axios"
 import qs from 'qs'
 export default {
     name: 'topic',
@@ -42,7 +51,10 @@ export default {
     data () {
         return {
             isLoading: false,
-            topicList:[]
+            topicList:[],
+            flags: false,
+            position: { x: 0, y: 0 },
+            nx: '', ny: '', dx: '', dy: '', xPum: '', yPum: '',
         }
     },
     methods: {
@@ -58,14 +70,56 @@ export default {
         },
         getTopicListSuccs(res){
             this.topicList = res.data
+        },
+        down(){
+            this.flags = true;
+            var touch;
+            if(event.touches){
+                touch = event.touches[0];
+            }else {
+                touch = event;
+            }
+            this.position.x = touch.clientX;
+            this.position.y = touch.clientY;
+            this.dx = moveDiv.offsetLeft;
+            this.dy = moveDiv.offsetTop;
+        },
+        move(){
+            if(this.flags){
+            var touch ;
+            if(event.touches){
+                touch = event.touches[0];
+            }else {
+                touch = event;
+            }
+            this.nx = touch.clientX - this.position.x;
+            this.ny = touch.clientY - this.position.y;
+            this.xPum = this.dx+this.nx;
+            this.yPum = this.dy+this.ny;
+            moveDiv.style.left = this.xPum+"px";
+            moveDiv.style.top = this.yPum +"px";
+            //阻止页面的滑动默认事件；如果碰到滑动问题，1.2 请注意是否获取到 touchmove
+            
+            }
+        },
+        //鼠标释放时候的函数
+        end(){
+            this.flags = false;
+        },
+        createdTopic(){
+            this.$router.push('crtopic')
         }
     },
     mounted(){
         this.getTopicList()
+        
     }
 }
 </script>
 <style lang='less' scoped>
+.topic{
+    touch-action: none;
+}
 .top{
 
         width: 100%;
@@ -78,11 +132,13 @@ export default {
         // box-shadow: 0 1px 40px 1px #ccc;
     }
 .topicList{
-    background-color: #fff;
-    margin: 20px 5px;
-    padding:5px 20px;
-    border-radius: 15px;
-    box-shadow:0 0 1px 1px #ccc;
+    .topicItem{
+        background-color: #fff;
+        margin: 20px 5px;
+        padding:5px 20px;
+        border-radius: 15px;
+        box-shadow:0 0 1px 1px #ccc;
+    }
     .title{
         font-size: 23px;
         padding: 10px 0;
@@ -97,6 +153,19 @@ export default {
             height: 100px;
             border-radius: 10px;
         }
+    }
+}
+.createTopic{
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px #ccc;
+    img{
+        width: 60px;
+        height: 60px;
     }
 }
 </style>

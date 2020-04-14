@@ -16,6 +16,7 @@ import change from '@/pages/change'
 import classData from '@/pages/classData'
 import topic from '@/pages/topic'
 import topicData from '@/pages/topicData'
+import crtopic from '@/pages/crtopic'
 
 Vue.use(Router)
 
@@ -104,6 +105,11 @@ export default new Router({
       path: '/topicData',
       name: 'topicData',
       component: topicData
+    },
+    {
+      path: '/crtopic',
+      name: 'crtopic',
+      component: crtopic
     }
   ]
 })

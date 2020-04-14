@@ -3,7 +3,7 @@
        <header-title :title="title"/>
        <div class="con">
            <input type="text" v-model="pinglun" class="con-input">
-           <van-button  @click="commentOn" type="primary" size="large" round class="button-sub">发表</van-button>
+           <van-button  @click="commentOn" color="#feae4c" type="primary" size="large" round class="button-sub">发表</van-button>
        </div>
    </div>
 </template>

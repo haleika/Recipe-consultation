@@ -26,7 +26,6 @@
                 </ul>
             </div>
        </div>
-       {{pl}}
        <div class="input">
            <input type="text"  v-model="pl" ><span @click="commentOn" style="color:#fff">发布</span>
        </div>
@@ -60,7 +59,7 @@ export default {
         },
         getTopicSucc(res){
             this.TopicData = res.data[0]
-            console.log("3333333",res)
+            // console.log("3333333",res)
         },
         showImg(){
             ImagePreview([this.TopicData.img
@@ -86,7 +85,7 @@ export default {
             }).then(this.getUserSucc)
        },
         getUserSucc(res){
-            console.log("usernameusername",res.data[0])
+            // console.log("usernameusername",res.data[0])
             this.userDetail = res.data[0]
         },
        commentOn(){

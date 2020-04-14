@@ -220,7 +220,7 @@ export default {
         getColSucc(res){
             this.col = res.data.code
             // console.log(this.col)
-            console.log("pinglun",res.data.code)
+            // console.log("pinglun",res.data.code)
         },
         collectionShipu(col){
             if(col == 1){
@@ -233,8 +233,8 @@ export default {
                 Inset.name = this.shipuData.title;
                 Inset.image = this.shipuData.coverimg;
                 Inset.author = this.shipuData.name;
-                console.log(this.shipuData.author)
-                console.log(this.shipuData)
+                // console.log(this.shipuData.author)
+                // console.log(this.shipuData)
                 axios({
                     headers:{'Content-Type':'application/x-www-form-urlencoded'},
                     method:'post',

@@ -82,7 +82,7 @@ export default {
         color: red;
     }
     .iconfont{
-        font-size: 23px;
+        font-size: 20px;
     }
 }
 </style>

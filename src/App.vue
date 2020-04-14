@@ -13,7 +13,12 @@
 
               <!-- 右边 -->
               <div class="right">
-                  <a href="">登录</a>
+                  <div class="userBox flex-box">
+                    <div class="img">
+                      <img :src="userDetail.avatar" alt="">
+                    </div>
+                    <div class="name">{{userDetail.name}}</div>
+                  </div>
               </div>
           </div>
 
@@ -24,12 +29,19 @@
 </template>
 
 <script>
+import axios from "axios"
+import qs from "qs"
 export default {
   name: 'App',
   watch:{
     '$route':function(to,from){
 　    document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
+    }
+  },
+  data(){
+    return{
+      userDetail:''
     }
   },
   methods:{
@@ -57,10 +69,28 @@ export default {
           addEventListener('resize',()=>{
             this.getScreen();
           })
-        }
+        },
+        getUser(){
+            if(this.$store.state.code == 1){
+                let user = {};
+                user.username = this.$store.state.username;
+                axios({
+                    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+                    method:'post',
+                    url:'api/user',
+                    data:qs.stringify(user)
+                }).then(this.getUserSucc)
+            }
+        },
+        getUserSucc(res){
+            this.userDetail = res.data[0]
+           console.log("usernameusername",this.userDetail)
+        },
   },
   mounted(){
     this.setMobile();
+    this.getUser();
+    this.getCookie("username","code");
   },
   created(){
     this.getScreen();
@@ -69,6 +99,9 @@ export default {
 </script>
 
 <style lang='less' scoped>
+html{
+   touch-action:none;
+}
 .top {
     width: 1180px;
     margin: 0 auto;
@@ -103,6 +136,22 @@ export default {
                     margin-bottom: -2px;
                 }
             }
+        }
+        .userBox{
+            line-height: 80px;
+          .img{
+            margin-top: 10px;
+            margin-right: 20px;
+            img{
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+            }
+          }
+          .name{
+            color: pink;
+            font-weight: bold;
+          }
         }
     }
 
