@@ -37,7 +37,7 @@ export default {
             }).then(this.getUserSucc)
        },
         getUserSucc(res){
-           console.log("usernameusername",res.data[0])
+            console.log("usernameusername",res.data[0])
             this.userDetail = res.data[0]
         },
        commentOn(){

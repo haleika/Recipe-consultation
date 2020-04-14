@@ -14,7 +14,8 @@ import pinglun from '@/pages/pinglun'
 import creation from '@/pages/creation'
 import change from '@/pages/change'
 import classData from '@/pages/classData'
-
+import topic from '@/pages/topic'
+import topicData from '@/pages/topicData'
 
 Vue.use(Router)
 
@@ -93,6 +94,16 @@ export default new Router({
       path: '/classData',
       name: 'classData',
       component: classData
+    },
+    {
+      path: '/topic',
+      name: 'topic',
+      component: topic
+    },
+    {
+      path: '/topicData',
+      name: 'topicData',
+      component: topicData
     }
   ]
 })
