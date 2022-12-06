@@ -15,7 +15,7 @@
     "element-ui": "^2.11.1",
     "font-awesome": "^4.7.0",
     "mint-ui": "^2.2.13",
-    "qs": "^6.8.0",
+    "qs": "^6.8.3",
     "vue": "^2.5.2",
     "vue-js-grid": "^1.0.1",
     "vue-quick-menu": "^1.0.7",
